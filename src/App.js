@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import PlanetProvider from './context/PlanetProvider';
 import Home from './pages/Home';
-import Table from './components/Table';
 import './App.css';
 
 function App() {
@@ -12,7 +11,6 @@ function App() {
         <Switch>
           <PlanetProvider>
             <Route exact path="/" component={ Home } />
-            <Table />
           </PlanetProvider>
         </Switch>
       </BrowserRouter>

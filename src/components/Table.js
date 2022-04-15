@@ -3,11 +3,14 @@ import PlanetContext from '../context/PlanetContext';
 import './Table.css';
 
 const Table = () => {
-  const { data } = useContext(PlanetContext);
+  const { data, planetName } = useContext(PlanetContext);
+  const { filterByName: { name } } = planetName;
+  console.log(name);
 
   return (
     <>
       <h1>Tabela</h1>
+
       <table className="table-container">
         <tbody>
           <tr className="column">
@@ -25,7 +28,7 @@ const Table = () => {
             <th>Edited</th>
             <th>URL</th>
           </tr>
-          {data && (
+          {name.length === 0 && (
             data.map((planet, index) => (
               <tr
                 key={ index }

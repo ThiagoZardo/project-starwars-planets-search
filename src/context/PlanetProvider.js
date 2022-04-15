@@ -5,6 +5,7 @@ import PlanetContext from './PlanetContext';
 const PlanetProvider = ({ children }) => {
   const URL = 'https://swapi-trybe.herokuapp.com/api/planets/';
   const [data, setData] = useState([]);
+  const [planetName, setPlanetName] = useState({ filterByName: { name: '' } });
 
   useEffect(() => {
     const getPlanetApi = async () => {
@@ -29,7 +30,7 @@ const PlanetProvider = ({ children }) => {
   // };
 
   return (
-    <PlanetContext.Provider value={ { data, setData } }>
+    <PlanetContext.Provider value={ { data, setData, planetName, setPlanetName } }>
       { children }
     </PlanetContext.Provider>
   );
