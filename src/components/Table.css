@@ -1,0 +1,16 @@
+.table-container {
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+table {
+  border: 1px solid black;
+}
+
+.column th {
+  border: 1px solid black;
+}
+
+td {
+  border: 1px solid black;
+}
