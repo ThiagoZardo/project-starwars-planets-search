@@ -6,6 +6,18 @@ const PlanetProvider = ({ children }) => {
   const URL = 'https://swapi-trybe.herokuapp.com/api/planets/';
   const [data, setData] = useState([]);
   const [planetName, setPlanetName] = useState({ filterByName: { name: '' } });
+  const [filterColumn, setFilterColumn] = useState();
+  const [filterComparison, setFilterComparison] = useState();
+  const [filterValue, setFilterValue] = useState();
+  const [planetFilters, setPlanetFilters] = useState({
+    filterByNumericValues: [
+      {
+        column: '',
+        comparison: '',
+        value: 0,
+      },
+    ],
+  });
 
   useEffect(() => {
     const getPlanetApi = async () => {
@@ -21,16 +33,23 @@ const PlanetProvider = ({ children }) => {
     getPlanetApi();
   }, []);
 
-  // Atualiza o estado
-  // const atualizeState = (newState) => {
-  //   setData((prevState) => [
-  //     ...prevState,
-  //     newState,
-  //   ]);
-  // };
-
   return (
-    <PlanetContext.Provider value={ { data, setData, planetName, setPlanetName } }>
+    <PlanetContext.Provider
+      value={ {
+        data,
+        setData,
+        planetName,
+        setPlanetName,
+        planetFilters,
+        setPlanetFilters,
+        filterColumn,
+        setFilterColumn,
+        filterComparison,
+        setFilterComparison,
+        filterValue,
+        setFilterValue,
+      } }
+    >
       { children }
     </PlanetContext.Provider>
   );
