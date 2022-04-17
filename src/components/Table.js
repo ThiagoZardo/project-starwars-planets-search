@@ -5,26 +5,19 @@ import './Table.css';
 const Table = () => {
   const { data, planetName, planetFilters } = useContext(PlanetContext);
   const { filterByName: { name } } = planetName;
-  const { filterByNumericValues: { column, comparison, value } } = planetFilters;
-  // console.log(typeof planetFilters.filterByNumericValues[0].value);
-  // console.log(planetFilters.filterByNumericValues[0].comparison);
-  // console.log('maior que');
+  const { filterByNumericValues: [{ column, comparison, value }] } = planetFilters;
 
-  let datas = data;
+  let dataPlanets = data;
   if (name !== '') {
-    datas = data.filter((el) => el.name.toLowerCase().includes(name.toLowerCase()));
+    dataPlanets = data.filter((el) => el.name.toLowerCase().includes(name.toLowerCase()));
   }
-  if (planetFilters.filterByNumericValues[0].column && comparison === 'maior que') {
-    datas = data.filter((el) => {
-      console.log('Maior q');
-      return el[column] > value;
-    });
-  }
-  if (planetFilters.filterByNumericValues[0].column && comparison === 'menor que') {
-    datas = data.filter((el) => el[column] < value);
-  }
-  if (planetFilters.filterByNumericValues[0].column && comparison === 'igual a') {
-    datas = data.filter((el) => el[column] === value);
+
+  if (column && comparison === 'maior que') {
+    dataPlanets = data.filter((el) => el[column] > Number(value));
+  } else if (column && comparison === 'menor que') {
+    dataPlanets = data.filter((el) => el[column] < Number(value));
+  } else if (column && comparison === 'igual a') {
+    dataPlanets = data.filter((el) => el[column] === value);
   }
 
   return (
@@ -50,7 +43,7 @@ const Table = () => {
           </tr>
 
           {
-            datas.map((element, index) => (
+            dataPlanets.map((element, index) => (
               <tr
                 key={ index }
               >

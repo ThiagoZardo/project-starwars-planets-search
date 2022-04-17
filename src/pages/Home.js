@@ -44,9 +44,9 @@ const Home = () => {
     setPlanetFilters({
       filterByNumericValues: [
         {
-          column: Object.values(filterColumn).toString(),
-          comparison: Object.values(filterComparison).toString(),
-          value: Number(Object.values(filterValue)),
+          column: filterColumn.column,
+          comparison: filterComparison.comparison,
+          value: filterValue.value,
         },
       ],
     });
