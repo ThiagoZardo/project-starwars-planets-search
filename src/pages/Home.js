@@ -15,33 +15,6 @@ const Home = () => {
     setBtnFilter,
   } = useContext(PlanetContext);
 
-  const handleChange = ({ target }) => {
-    setBtnFilter({
-      enable: false,
-    });
-    setPlanetName({
-      filterByName: { name: target.value },
-    });
-  };
-
-  const changeColumn = ({ target }) => {
-    setFilterColumn({
-      column: target.value,
-    });
-  };
-
-  const changeComparison = ({ target }) => {
-    setFilterComparison({
-      comparison: target.value,
-    });
-  };
-
-  const changeValue = ({ target }) => {
-    setFilterValue({
-      value: target.value,
-    });
-  };
-
   const filterPlanets = () => {
     setBtnFilter({
       enable: true,
@@ -64,14 +37,18 @@ const Home = () => {
         type="text"
         data-testid="name-filter"
         name="name-filter"
-        onChange={ handleChange }
+        onChange={ ({ target }) => setPlanetName({
+          filterByName: { name: target.value },
+        }) }
       />
 
       <select
         data-testid="column-filter"
         name="column"
         value={ setFilterColumn.column }
-        onChange={ changeColumn }
+        onChange={ ({ target }) => setFilterColumn({
+          column: target.value,
+        }) }
       >
         <option>population</option>
         <option>orbital_period</option>
@@ -84,7 +61,9 @@ const Home = () => {
         data-testid="comparison-filter"
         name="comparison"
         value={ setFilterComparison.comparison }
-        onChange={ changeComparison }
+        onChange={ ({ target }) => setFilterComparison({
+          comparison: target.value,
+        }) }
       >
         <option>maior que</option>
         <option>menor que</option>
@@ -96,7 +75,9 @@ const Home = () => {
         data-testid="value-filter"
         name="value"
         value={ filterValue.value }
-        onChange={ changeValue }
+        onChange={ ({ target }) => setFilterValue({
+          value: target.value,
+        }) }
       />
 
       <button

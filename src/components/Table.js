@@ -7,8 +7,8 @@ const Table = () => {
   const { filterByName: { name } } = planetName;
   const { filterByNumericValues: [{ column, comparison, value }] } = planetFilters;
 
-  let dataPlanets = data;
   let planetsName = data;
+  let dataPlanets = data;
   if (name) {
     planetsName = data.filter((el) => el.name.toLowerCase().includes(name.toLowerCase()));
   }
