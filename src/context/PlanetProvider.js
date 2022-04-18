@@ -12,8 +12,8 @@ const PlanetProvider = ({ children }) => {
   const [planetFilters, setPlanetFilters] = useState({
     filterByNumericValues: [
       {
-        column: '',
-        comparison: '',
+        column: 'population',
+        comparison: 'maior que',
         value: 0,
       },
     ],
@@ -24,6 +24,7 @@ const PlanetProvider = ({ children }) => {
       try {
         const request = await fetch(URL);
         const { results } = await request.json();
+        results.forEach((el) => delete el.residents);
         setData(results);
         return results;
       } catch (error) {

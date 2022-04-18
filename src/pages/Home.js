@@ -9,11 +9,9 @@ const Home = () => {
     setFilterColumn,
     setFilterComparison,
     setFilterValue,
-    filterByNumericValues,
     filterColumn,
     filterComparison,
     filterValue,
-
   } = useContext(PlanetContext);
 
   const handleChange = ({ target }) => {
@@ -65,7 +63,7 @@ const Home = () => {
       <select
         data-testid="column-filter"
         name="column"
-        value={ filterByNumericValues }
+        value={ setFilterColumn.column }
         onChange={ changeColumn }
       >
         <option>population</option>
@@ -78,7 +76,7 @@ const Home = () => {
       <select
         data-testid="comparison-filter"
         name="comparison"
-        value={ filterByNumericValues }
+        value={ setFilterComparison.comparison }
         onChange={ changeComparison }
       >
         <option>maior que</option>
@@ -90,7 +88,7 @@ const Home = () => {
         type="number"
         data-testid="value-filter"
         name="value"
-        value={ filterByNumericValues }
+        value={ setFilterValue.value }
         onChange={ changeValue }
       />
 

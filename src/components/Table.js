@@ -8,11 +8,11 @@ const Table = () => {
   const { filterByNumericValues: [{ column, comparison, value }] } = planetFilters;
 
   let dataPlanets = data;
-  if (name !== '') {
+  if (name) {
     dataPlanets = data.filter((el) => el.name.toLowerCase().includes(name.toLowerCase()));
   }
 
-  if (column && comparison === 'maior que') {
+  if (column !== '' && comparison === 'maior que') {
     dataPlanets = data.filter((el) => el[column] > Number(value));
   } else if (column && comparison === 'menor que') {
     dataPlanets = data.filter((el) => el[column] < Number(value));
