@@ -12,7 +12,7 @@ const Home = () => {
     filterColumn,
     filterComparison,
     filterValue,
-    setBtnFilter
+    setBtnFilter,
   } = useContext(PlanetContext);
 
   const handleChange = ({ target }) => {
