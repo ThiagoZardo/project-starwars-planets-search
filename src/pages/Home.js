@@ -12,6 +12,7 @@ const Home = () => {
     filterColumn,
     filterComparison,
     filterValue,
+    setBtnFilter
   } = useContext(PlanetContext);
 
   const handleChange = ({ target }) => {
@@ -39,6 +40,9 @@ const Home = () => {
   };
 
   const filterPlanets = () => {
+    setBtnFilter({
+      enable: true,
+    });
     setPlanetFilters({
       filterByNumericValues: [
         {
@@ -88,7 +92,7 @@ const Home = () => {
         type="number"
         data-testid="value-filter"
         name="value"
-        value={ setFilterValue.value }
+        value={ filterValue.value }
         onChange={ changeValue }
       />
 
