@@ -15,16 +15,19 @@ const Table = () => {
 
   if (btnFilter.enable === true && column && comparison === 'maior que') {
     dataPlanets = data.filter((el) => el[column] > Number(value));
-  } else if (btnFilter.enable === true && column && comparison === 'menor que') {
+  }
+
+  if (btnFilter.enable === true && column && comparison === 'menor que') {
     dataPlanets = data.filter((el) => el[column] < Number(value));
-  } else if (btnFilter.enable === true && column && comparison === 'igual a') {
+  }
+
+  if (btnFilter.enable === true && column && comparison === 'igual a') {
     dataPlanets = data.filter((el) => el[column] === value);
   }
 
   return (
     <>
       <h1>Tabela</h1>
-
       <table className="table-container">
         <tbody>
           <tr className="column">

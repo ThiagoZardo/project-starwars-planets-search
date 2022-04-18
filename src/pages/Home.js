@@ -16,6 +16,9 @@ const Home = () => {
   } = useContext(PlanetContext);
 
   const handleChange = ({ target }) => {
+    setBtnFilter({
+      enable: false,
+    });
     setPlanetName({
       filterByName: { name: target.value },
     });
