@@ -10,7 +10,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <PlanetProvider>
-            <Route exact path="/" component={ Home } />
+            <Route path="/" exact component={ Home } />
           </PlanetProvider>
         </Switch>
       </BrowserRouter>
