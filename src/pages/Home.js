@@ -15,6 +15,15 @@ const Home = () => {
     setBtnFilter,
   } = useContext(PlanetContext);
 
+  const handleChange = ({ target }) => {
+    setBtnFilter({
+      enable: false,
+    });
+    setPlanetName({
+      filterByName: { name: target.value },
+    });
+  };
+
   const filterPlanets = () => {
     setBtnFilter({
       enable: true,
@@ -37,9 +46,7 @@ const Home = () => {
         type="text"
         data-testid="name-filter"
         name="name-filter"
-        onChange={ ({ target }) => setPlanetName({
-          filterByName: { name: target.value },
-        }) }
+        onChange={ handleChange }
       />
 
       <select
