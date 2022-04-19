@@ -60,19 +60,17 @@ const Home = () => {
         },
       ],
     }));
-
-    console.log(filterComparison.comparison);
     if (filterColumn.column && filterComparison.comparison === 'igual a') {
       return setFilterData((prevState) => (prevState
         .filter((el) => el[filterColumn.column] === filterValue.value)));
     }
     if (filterColumn.column && filterComparison.comparison === 'menor que') {
-      return setFilterData(filterData
-        .filter((el) => el[filterColumn.column] < Number(filterValue.value)));
+      return setFilterData((prevState) => (prevState
+        .filter((el) => el[filterColumn.column] < Number(filterValue.value))));
     }
     if (filterColumn.column && filterComparison.comparison === 'maior que') {
-      return setFilterData(filterData
-        .filter((el) => el[filterColumn.column] > Number(filterValue.value)));
+      return setFilterData((prevState) => (prevState
+        .filter((el) => el[filterColumn.column] > Number(filterValue.value))));
     }
   };
 
