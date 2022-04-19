@@ -2,11 +2,12 @@
 import React, { useContext, useEffect } from 'react';
 import PlanetContext from '../context/PlanetContext';
 import Table from '../components/Table';
+import './Home.css';
 
 const Home = () => {
   const {
     data,
-    filterData,
+    // filterData,
     setFilterData,
     planetName,
     requestAPI,
@@ -22,7 +23,7 @@ const Home = () => {
   } = useContext(PlanetContext);
 
   const { filterByName: { name } } = planetName;
-  const { filterByNumericValues: [{ column, comparison, value }] } = planetFilters;
+  // const { filterByNumericValues: [{ column, comparison, value }] } = planetFilters;
 
   // Filtra por textos digitados
   const filterOnchange = () => {
@@ -60,6 +61,7 @@ const Home = () => {
         },
       ],
     }));
+
     if (filterColumn.column && filterComparison.comparison === 'igual a') {
       return setFilterData((prevState) => (prevState
         .filter((el) => el[filterColumn.column] === filterValue.value)));
@@ -73,6 +75,15 @@ const Home = () => {
         .filter((el) => el[filterColumn.column] > Number(filterValue.value))));
     }
   };
+
+  const historyFiltersColumns = planetFilters.filterByNumericValues
+    .filter((el) => el.column).map((el2) => el2.column);
+
+  const historyFiltersComparisson = planetFilters.filterByNumericValues
+    .filter((el) => el.comparison).map((el2) => el2.comparison);
+
+  const historyFiltersValue = planetFilters.filterByNumericValues
+    .filter((el) => el.value).map((el2) => el2.value);
 
   return (
     <section>
@@ -92,6 +103,10 @@ const Home = () => {
           column: target.value,
         }) }
       >
+        {/* {
+          const historyFiltersColumns = planetFilters.filterByNumericValues
+            .filter((el) => Object.values(el.column))
+        } */}
         <option>population</option>
         <option>orbital_period</option>
         <option>diameter</option>
@@ -129,8 +144,32 @@ const Home = () => {
       >
         FILTRAR
       </button>
+      {
+        historyFiltersColumns.map((elColumn, index) => (
+          historyFiltersComparisson.map((elComparisson) => (
+            historyFiltersValue.map((elValue) => (
+              <>
+                <span
+                  key={ index }
+                >
+                  { elColumn }
+                  { elComparisson }
+                  { elValue }
+                </span>
+                <button
+                  className="btnClose"
+                  type="button"
+                >
+                  X
+                </button>
+              </>
+            ))
+          ))
+        ))
+      }
 
       <Table />
+
     </section>
   );
 };

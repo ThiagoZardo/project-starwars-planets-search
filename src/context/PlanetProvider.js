@@ -19,8 +19,8 @@ const PlanetProvider = ({ children }) => {
   const [planetFilters, setPlanetFilters] = useState({
     filterByNumericValues: [
       {
-        column: 'population',
-        comparison: 'maior que',
+        column: '',
+        comparison: '',
         value: 0,
       },
     ],
