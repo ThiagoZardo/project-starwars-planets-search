@@ -5,6 +5,7 @@ import fetchAPI from '../services/fetchStarWars';
 
 const PlanetProvider = ({ children }) => {
   const [data, setData] = useState([]);
+  const [filterData, setFilterData] = useState([]);
   const [planetName, setPlanetName] = useState({ filterByName: { name: '' } });
   const [filterColumn, setFilterColumn] = useState({
     column: 'population',
@@ -14,9 +15,6 @@ const PlanetProvider = ({ children }) => {
   });
   const [filterValue, setFilterValue] = useState({
     value: 0,
-  });
-  const [btnFilter, setBtnFilter] = useState({
-    enable: false,
   });
   const [planetFilters, setPlanetFilters] = useState({
     filterByNumericValues: [
@@ -38,6 +36,8 @@ const PlanetProvider = ({ children }) => {
       value={ {
         data,
         setData,
+        filterData,
+        setFilterData,
         planetName,
         setPlanetName,
         planetFilters,
@@ -48,8 +48,6 @@ const PlanetProvider = ({ children }) => {
         setFilterComparison,
         filterValue,
         setFilterValue,
-        btnFilter,
-        setBtnFilter,
         requestAPI,
       } }
     >

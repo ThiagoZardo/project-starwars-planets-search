@@ -1,3 +1,4 @@
+// const URL = 'https://swapi.dev/api/planets';
 const URL = 'https://swapi-trybe.herokuapp.com/api/planets/';
 
 const fetchAPI = async () => {

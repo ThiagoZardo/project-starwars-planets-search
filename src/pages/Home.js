@@ -5,8 +5,13 @@ import Table from '../components/Table';
 
 const Home = () => {
   const {
+    data,
+    filterData,
+    setFilterData,
+    planetName,
     requestAPI,
     setPlanetName,
+    planetFilters,
     setPlanetFilters,
     setFilterColumn,
     setFilterComparison,
@@ -14,35 +19,61 @@ const Home = () => {
     filterColumn,
     filterComparison,
     filterValue,
-    setBtnFilter,
   } = useContext(PlanetContext);
+
+  const { filterByName: { name } } = planetName;
+  const { filterByNumericValues: [{ column, comparison, value }] } = planetFilters;
+
+  // Filtra por textos digitados
+  const filterOnchange = () => {
+    if (name === '') {
+      return setFilterData(data);
+    }
+    if (name) {
+      return setFilterData(data.filter((el) => el.name.toLowerCase()
+        .includes(name.toLowerCase())));
+    }
+  };
+
+  useEffect(() => {
+    filterOnchange();
+  }, [name, data]);
 
   useEffect(() => {
     requestAPI();
   }, []);
 
   const handleChange = ({ target }) => {
-    setBtnFilter({
-      enable: false,
-    });
     setPlanetName({
       filterByName: { name: target.value },
     });
   };
 
   const filterPlanets = () => {
-    setBtnFilter({
-      enable: true,
-    });
-    setPlanetFilters({
+    setPlanetFilters((prevState) => ({
       filterByNumericValues: [
+        ...prevState.filterByNumericValues,
         {
           column: filterColumn.column,
           comparison: filterComparison.comparison,
           value: filterValue.value,
         },
       ],
-    });
+    }));
+
+    console.log(filterComparison.comparison);
+    if (filterColumn.column && filterComparison.comparison === 'igual a') {
+      return setFilterData((prevState) => (prevState
+        .filter((el) => el[filterColumn.column] === filterValue.value)));
+    }
+    if (filterColumn.column && filterComparison.comparison === 'menor que') {
+      return setFilterData(filterData
+        .filter((el) => el[filterColumn.column] < Number(filterValue.value)));
+    }
+    if (filterColumn.column && filterComparison.comparison === 'maior que') {
+      return setFilterData(filterData
+        .filter((el) => el[filterColumn.column] > Number(filterValue.value)));
+    }
   };
 
   return (
