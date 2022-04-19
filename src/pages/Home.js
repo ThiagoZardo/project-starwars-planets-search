@@ -1,9 +1,11 @@
-import React, { useContext } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useContext, useEffect } from 'react';
 import PlanetContext from '../context/PlanetContext';
 import Table from '../components/Table';
 
 const Home = () => {
   const {
+    requestAPI,
     setPlanetName,
     setPlanetFilters,
     setFilterColumn,
@@ -14,6 +16,10 @@ const Home = () => {
     filterValue,
     setBtnFilter,
   } = useContext(PlanetContext);
+
+  useEffect(() => {
+    requestAPI();
+  }, []);
 
   const handleChange = ({ target }) => {
     setBtnFilter({

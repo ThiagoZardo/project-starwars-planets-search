@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import PlanetContext from './PlanetContext';
+import fetchAPI from '../services/fetchStarWars';
 
 const PlanetProvider = ({ children }) => {
-  const URL = 'https://swapi-trybe.herokuapp.com/api/planets/';
   const [data, setData] = useState([]);
   const [planetName, setPlanetName] = useState({ filterByName: { name: '' } });
   const [filterColumn, setFilterColumn] = useState({
@@ -28,20 +28,10 @@ const PlanetProvider = ({ children }) => {
     ],
   });
 
-  useEffect(() => {
-    const getPlanetApi = async () => {
-      try {
-        const request = await fetch(URL);
-        const { results } = await request.json();
-        results.forEach((el) => delete el.residents);
-        setData(results);
-        return results;
-      } catch (error) {
-        return error;
-      }
-    };
-    getPlanetApi();
-  }, []);
+  const requestAPI = async () => {
+    const responseFetchAPI = await fetchAPI();
+    setData(responseFetchAPI);
+  };
 
   return (
     <PlanetContext.Provider
@@ -60,6 +50,7 @@ const PlanetProvider = ({ children }) => {
         setFilterValue,
         btnFilter,
         setBtnFilter,
+        requestAPI,
       } }
     >
       { children }
