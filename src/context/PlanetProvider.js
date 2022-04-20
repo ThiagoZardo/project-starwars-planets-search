@@ -21,10 +21,18 @@ const PlanetProvider = ({ children }) => {
       {
         column: '',
         comparison: '',
-        value: 0,
+        value: '',
       },
     ],
   });
+
+  const [historyColumn, setHistoryColumn] = useState([
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ]);
 
   const requestAPI = async () => {
     const responseFetchAPI = await fetchAPI();
@@ -49,6 +57,8 @@ const PlanetProvider = ({ children }) => {
         filterValue,
         setFilterValue,
         requestAPI,
+        historyColumn,
+        setHistoryColumn,
       } }
     >
       { children }

@@ -19,6 +19,8 @@ const Home = () => {
     filterColumn,
     filterComparison,
     filterValue,
+    historyColumn,
+    setHistoryColumn,
   } = useContext(PlanetContext);
 
   const { filterByName: { name } } = planetName;
@@ -34,6 +36,13 @@ const Home = () => {
         .includes(name.toLowerCase())));
     }
   };
+
+  useEffect(() => {
+    setFilterColumn({
+      column: historyColumn[0],
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [historyColumn]);
 
   useEffect(() => {
     filterOnchange();
@@ -52,6 +61,8 @@ const Home = () => {
   };
 
   const filterPlanets = () => {
+    // historyColumCopy.splice(historyColumCopy.indexOf(filterColumn.column), 1);
+
     setPlanetFilters((prevState) => ({
       filterByNumericValues: [
         ...prevState.filterByNumericValues,
@@ -62,6 +73,8 @@ const Home = () => {
         },
       ],
     }));
+
+    setHistoryColumn(historyColumn.filter((el) => el !== filterColumn.column));
 
     if (filterColumn.column && filterComparison.comparison === 'igual a') {
       return setFilterData((prevState) => (prevState
@@ -80,11 +93,15 @@ const Home = () => {
   const historyFiltersColumns = planetFilters.filterByNumericValues
     .filter((el) => el.column).map((el2) => el2.column);
 
-  const historyFiltersComparisson = planetFilters.filterByNumericValues
-    .filter((el) => el.comparison).map((el2) => el2.comparison);
+  // const historyFiltersComparisson = planetFilters.filterByNumericValues
+  //   .filter((el) => el.comparison).map((el2) => el2.comparison);
 
-  const historyFiltersValue = planetFilters.filterByNumericValues
-    .filter((el) => el.value).map((el2) => el2.value);
+  // const historyFiltersValue = planetFilters.filterByNumericValues
+  //   .filter((el) => el.value).map((el2) => el2.value);
+
+  const handleRemoveItem = ({ target }) => {
+    target.remove();
+  };
 
   return (
     <section>
@@ -107,11 +124,13 @@ const Home = () => {
           column: target.value,
         }) }
       >
-        <option>population</option>
-        <option>orbital_period</option>
-        <option>diameter</option>
-        <option>rotation_period</option>
-        <option>surface_water</option>
+        { historyColumn.map((el) => (
+          <option
+            key={ el }
+          >
+            { el }
+          </option>
+        )) }
       </select>
 
       <select
@@ -149,26 +168,19 @@ const Home = () => {
       </button>
       {
         historyFiltersColumns.map((elColumn, index) => (
-          historyFiltersComparisson.map((elComparisson) => (
-            historyFiltersValue.map((elValue) => (
-              <>
-                <span
-                  className="history_search"
-                  key={ index }
-                >
-                  { elColumn }
-                  { elComparisson }
-                  { elValue }
-                </span>
-                <button
-                  className="btnClose"
-                  type="button"
-                >
-                  X
-                </button>
-              </>
-            ))
-          ))
+          // A sintaxe abaixo do span foi tirada da doc do es-lint
+          <span
+            className="history_search"
+            key={ index }
+            onClick={ handleRemoveItem }
+            onKeyPress={ handleRemoveItem }
+            role="button"
+            tabIndex="0"
+          >
+            { elColumn }
+            { ' ' }
+            x
+          </span>
         ))
       }
 
