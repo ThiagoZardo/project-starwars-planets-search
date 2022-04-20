@@ -87,7 +87,7 @@ const Home = () => {
 
   return (
     <section>
-      <h1>Home</h1>
+      <h1>STAR WARS</h1>
       <input
         className="input_search"
         placeholder="Busque pelo nome do planeta..."
