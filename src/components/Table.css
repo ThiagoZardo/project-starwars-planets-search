@@ -1,16 +1,28 @@
 .table-container {
+  background-color: white;
+  border-radius: 10px;
   margin: 0 auto;
   max-width: 900px;
+  z-index: 2;
 }
 
 table {
+  background-color: white;
   border: 1px solid black;
+  border-radius: 5px;
+  z-index: 2;
 }
 
 .column th {
+  background-color: white;
   border: 1px solid black;
+  border-radius: 5px;
+  z-index: 2;
 }
 
 td {
+  background-color: white;
   border: 1px solid black;
+  border-radius: 5px;
+  z-index: 2;
 }

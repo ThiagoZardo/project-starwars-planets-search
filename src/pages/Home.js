@@ -89,6 +89,8 @@ const Home = () => {
     <section>
       <h1>Home</h1>
       <input
+        className="input_search"
+        placeholder="Busque pelo nome do planeta..."
         type="text"
         data-testid="name-filter"
         name="name-filter"
@@ -97,16 +99,13 @@ const Home = () => {
 
       <select
         data-testid="column-filter"
+        className="input_column"
         name="column"
         value={ setFilterColumn.column }
         onChange={ ({ target }) => setFilterColumn({
           column: target.value,
         }) }
       >
-        {/* {
-          const historyFiltersColumns = planetFilters.filterByNumericValues
-            .filter((el) => Object.values(el.column))
-        } */}
         <option>population</option>
         <option>orbital_period</option>
         <option>diameter</option>
@@ -117,6 +116,7 @@ const Home = () => {
       <select
         data-testid="comparison-filter"
         name="comparison"
+        className="input_comparison"
         value={ setFilterComparison.comparison }
         onChange={ ({ target }) => setFilterComparison({
           comparison: target.value,
@@ -130,6 +130,7 @@ const Home = () => {
       <input
         type="number"
         data-testid="value-filter"
+        className="input_value"
         name="value"
         value={ filterValue.value }
         onChange={ ({ target }) => setFilterValue({
@@ -139,6 +140,7 @@ const Home = () => {
 
       <button
         type="button"
+        className="btn_filter"
         data-testid="button-filter"
         onClick={ filterPlanets }
       >
@@ -150,6 +152,7 @@ const Home = () => {
             historyFiltersValue.map((elValue) => (
               <>
                 <span
+                  className="history_search"
                   key={ index }
                 >
                   { elColumn }

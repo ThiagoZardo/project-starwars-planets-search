@@ -1,11 +1,61 @@
+body {
+  background-image: url(../images/star-wars-background.jpg);
+  z-index: 1;
+}
+
 span {
   display: block;
   margin: 20px 30px;
-  text-align: left;
+  text-align: center;
+  z-index: 2;
 }
 
 .btnClose {
   display: block;
-  margin: 20px 30px;
-  text-align: left;
+  margin: 0 auto;
+  text-align: center;
+  z-index: 2;
+}
+
+.input_search {
+  border-radius: 5px;
+  display: block;
+  font-size: 25px;
+  margin: 10px auto;
+  width: 400px;
+  z-index: 2;
+}
+
+.input_column, .input_comparison {
+  border-radius: 10px;
+  display: inline-block;
+  font-size: 22px;
+  height: 30px;
+  margin: 10px;
+  width: 150px;
+  z-index: 2;
+}
+
+.input_value {
+  border-radius: 10px;
+  display: block;
+  font-size: 22px;
+  height: 30px;
+  margin: 5px auto;
+  width: 150px;
+  z-index: 2;
+}
+
+.btn_filter {
+  border-radius: 20px;
+  height: 40px;
+  margin: 20px 0;
+  outline: none;
+  width: 150px;
+  z-index: 2;
+}
+
+.history_search {
+  color: blue;
+  z-index: 2;
 }
