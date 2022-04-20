@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from 'react';
 import PlanetContext from '../context/PlanetContext';
 import Table from '../components/Table';
@@ -38,10 +37,12 @@ const Home = () => {
 
   useEffect(() => {
     filterOnchange();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name, data]);
 
   useEffect(() => {
     requestAPI();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChange = ({ target }) => {
