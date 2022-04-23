@@ -6,7 +6,6 @@ import './Home.css';
 const Home = () => {
   const {
     data,
-    // filterData,
     setFilterData,
     planetName,
     requestAPI,
@@ -24,7 +23,6 @@ const Home = () => {
   } = useContext(PlanetContext);
 
   const { filterByName: { name } } = planetName;
-  // const { filterByNumericValues: [{ column, comparison, value }] } = planetFilters;
 
   // Filtra por textos digitados
   const filterOnchange = () => {
@@ -61,8 +59,6 @@ const Home = () => {
   };
 
   const filterPlanets = () => {
-    // historyColumCopy.splice(historyColumCopy.indexOf(filterColumn.column), 1);
-
     setPlanetFilters((prevState) => ({
       filterByNumericValues: [
         ...prevState.filterByNumericValues,
@@ -93,14 +89,26 @@ const Home = () => {
   const historyFiltersColumns = planetFilters.filterByNumericValues
     .filter((el) => el.column).map((el2) => el2.column);
 
-  // const historyFiltersComparisson = planetFilters.filterByNumericValues
-  //   .filter((el) => el.comparison).map((el2) => el2.comparison);
-
-  // const historyFiltersValue = planetFilters.filterByNumericValues
-  //   .filter((el) => el.value).map((el2) => el2.value);
-
   const handleRemoveItem = ({ target }) => {
-    target.remove();
+    console.log(target.value);
+    setHistoryColumn((prevState) => [...prevState, target.value]);
+
+    console.log(setFilterData((prevState) => (prevState
+      .filter((el) => el[filterColumn.column] !== target.value))));
+    target.parentNode.remove();
+  };
+
+  const removeFilters = () => {
+    // const span = document.getElementsByTagName('span');
+    // span.forEach((element) => element.remove());
+    setFilterData(data);
+    setHistoryColumn([
+      'population',
+      'orbital_period',
+      'diameter',
+      'rotation_period',
+      'surface_water',
+    ]);
   };
 
   return (
@@ -160,8 +168,8 @@ const Home = () => {
 
       <button
         type="button"
-        className="btn_filter"
         data-testid="button-filter"
+        className="btn_filter"
         onClick={ filterPlanets }
       >
         FILTRAR
@@ -172,17 +180,28 @@ const Home = () => {
           <span
             className="history_search"
             key={ index }
-            onClick={ handleRemoveItem }
-            onKeyPress={ handleRemoveItem }
-            role="button"
-            tabIndex="0"
           >
             { elColumn }
-            { ' ' }
-            x
+            <button
+              type="button"
+              data-testid="filter"
+              onClick={ handleRemoveItem }
+              value={ elColumn }
+            >
+              x
+            </button>
           </span>
         ))
       }
+
+      <button
+        type="button"
+        data-testid="button-remove-filters"
+        className="btn_filter"
+        onClick={ removeFilters }
+      >
+        REMOVER FILTROS
+      </button>
 
       <Table />
 

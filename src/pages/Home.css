@@ -46,9 +46,10 @@ span {
 
 .btn_filter {
   border-radius: 20px;
+  cursor: pointer;
   display: inline-block;
   height: 40px;
-  margin: 20px 0;
+  margin: 20px;
   width: 150px;
   z-index: 2;
 }

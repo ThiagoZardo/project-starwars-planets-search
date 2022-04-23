@@ -34,6 +34,15 @@ const PlanetProvider = ({ children }) => {
     'surface_water',
   ]);
 
+  const [planetSort, setPlanetSort] = useState(
+    {
+      order: {
+        column: 'population',
+        sort: 'ASC',
+      },
+    },
+  );
+
   const requestAPI = async () => {
     const responseFetchAPI = await fetchAPI();
     setData(responseFetchAPI);
@@ -59,6 +68,8 @@ const PlanetProvider = ({ children }) => {
         requestAPI,
         historyColumn,
         setHistoryColumn,
+        planetSort,
+        setPlanetSort,
       } }
     >
       { children }
